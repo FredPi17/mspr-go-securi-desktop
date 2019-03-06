@@ -13,6 +13,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("Identification.fxml"));
         primaryStage.setTitle("Go Securi");
+        primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
         root.getStylesheets().add("style.css");
         primaryStage.show();

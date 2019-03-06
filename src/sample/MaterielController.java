@@ -7,22 +7,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class IdentificationController {
+public class MaterielController {
 
     @FXML
-    private Button captureButton;
+    private Button btnRetourIdentification;
 
     @FXML
-    private ImageView imageViewWebcam;
+    private ImageView ImgVPhotoUtilisateur;
 
     @FXML
-    private void searchDataBase(ActionEvent event){
-        //takePicture()
-        Controller.ChangeStage(event,getClass(),"materiel.fxml");
+    private ListView lstMateriel;
+
+    @FXML
+    private void BacktoIdentification(ActionEvent event){
+        Controller.ChangeStage(event, getClass(), "Identification.fxml");
     }
+
 }
