@@ -10,6 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 
+import java.io.File;
+import java.net.URL;
+
 /**
  * The main class for a JavaFX application. It creates and handle the main
  * window with its resources (style, graphics, etc.).
@@ -29,14 +32,19 @@ public class FaceDetection extends Application
 	{
 		try
 		{
+
 			// load the FXML resource
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("FaceDetection.fxml"));
-			BorderPane root = (BorderPane) loader.load();
+			URL urlFXML = new File("src/main/resources/FaceDetection.fxml").toURL();
+			URL urlCSS = new File("src/main/resources/application.css").toURL();
+
+			FXMLLoader loader = new FXMLLoader(urlFXML);
+			BorderPane root = loader.load();
+
 			// set a whitesmoke background
 			root.setStyle("-fx-background-color: whitesmoke;");
 			// create and style a scene
 			Scene scene = new Scene(root, 800, 600);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(urlCSS.toString());
 			// create the stage with the given title and the previously created
 			// scene
 			primaryStage.setTitle("Face Detection and Tracking");
@@ -45,7 +53,7 @@ public class FaceDetection extends Application
 			primaryStage.show();
 			
 			// init the controller
-			FaceDetectionController controller = loader.getController();
+			final FaceDetectionController controller = loader.getController();
 			controller.init();
 			
 			// set the proper behavior on closing the application
@@ -65,8 +73,7 @@ public class FaceDetection extends Application
 	public static void main(String[] args)
 	{
 		// load the native OpenCV library
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		
+		nu.pattern.OpenCV.loadShared();
 		launch(args);
 	}
 }
