@@ -20,7 +20,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="mspr_go_securi_desktop" target="1.5" />
+      <module name="mspr_go_securi_desktop" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

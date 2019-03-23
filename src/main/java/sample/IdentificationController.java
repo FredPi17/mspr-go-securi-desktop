@@ -1,5 +1,8 @@
 package sample;
 
+import classes.Users;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.cloud.FirestoreClient;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
@@ -17,8 +20,12 @@ public class IdentificationController {
 
     @FXML
     private void searchDataBase(ActionEvent event){
+        //Get base de donnée
+        Firestore db = FirestoreClient.getFirestore();
+
         //takePicture()
-        Controller.ChangeStage(event,getClass(),"Materiel.fxml");
+        Users user = new Users("Agent1", "Agent1", "Agent1");
+        Controller.ChangeStage(event,getClass(), user);
     }
 
     @FXML

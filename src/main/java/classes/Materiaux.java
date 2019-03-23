@@ -5,13 +5,26 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 
 public class Materiaux {
-    public String nom;
-    public Integer quantite;
-    private final BooleanProperty on = new SimpleBooleanProperty();
+    private String id;
+    private String nom;
+    private Integer quantite;
+    private Integer sortie;
+    private final BooleanProperty outOfStock = new SimpleBooleanProperty();
+    private final BooleanProperty used = new SimpleBooleanProperty();
 
-    public Materiaux(String nom, Integer quantite){
+    public Materiaux(String id, String nom, Integer quantite, Integer sortie){
+        this.id = id;
         this.nom = nom;
         this.quantite = quantite;
+        setSortie(sortie);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -30,21 +43,47 @@ public class Materiaux {
         this.quantite = quantite;
     }
 
+    public Integer getSortie() {
+        return sortie;
+    }
+
+    public void setSortie(Integer sortie) {
+        this.sortie = sortie;
+        if(sortie.equals(quantite)){
+            setOutOfStock(true);
+        }
+        else {
+            setOutOfStock(false);
+        }
+    }
+
     @Override
     public String toString() {
-        return nom +", "+quantite;
+        return nom; //+", "+quantite + ", " + sortie;
     }
 
-    public final BooleanProperty onProperty() {
-        return this.on;
+    public final BooleanProperty isUsedProperty(){
+        return this.used;
     }
 
-    public final boolean isOn() {
-        return this.onProperty().get();
+    public final boolean isUsed(){
+        return this.isUsedProperty().get();
     }
 
-    public final void setOn(final boolean on) {
-        this.onProperty().set(on);
+    public final void setUsed(boolean use){
+        this.isUsedProperty().set(use);
+    }
+
+    public final BooleanProperty outOfStockProperty() {
+        return this.outOfStock;
+    }
+
+    public final boolean isOutOfStock() {
+        return this.outOfStockProperty().get();
+    }
+
+    private final void setOutOfStock(final boolean outOfStock) {
+        this.outOfStockProperty().set(outOfStock);
     }
 
 }
