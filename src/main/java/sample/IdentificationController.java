@@ -53,6 +53,8 @@ public class IdentificationController {
 
         //takePicture()
         Users user = new Users("Agent1", "Agent1", "Agent1");
+        Mat imageAComparer = grabFrame();
+        stopAcquisition();
         Controller.ChangeStage(event,getClass(), user);
     }
 

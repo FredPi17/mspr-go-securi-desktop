@@ -53,8 +53,8 @@ public class MaterielController {
     @FXML
     private void initialize() {
         System.out.println("Demarrage de la page Materiel");
-        Image image = new Image("src/main/resources/eyes.jpg");
-        ImgVPhotoUtilisateur.setImage(image);
+        //Image image = new Image("eyes.jpg");
+        //ImgVPhotoUtilisateur.setImage(image);
         ArrayList<Materiaux> list = new ArrayList<Materiaux>();
         ObservableList<Materiaux> ObListMateriaux = FXCollections.observableArrayList(list);
         lstMateriel.setItems(ObListMateriaux);
