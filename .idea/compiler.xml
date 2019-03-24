@@ -16,10 +16,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="mspr_go_securi_desktop" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="face-detection" target="1.5" />
       <module name="mspr_go_securi_desktop" target="8" />
     </bytecodeTargetLevel>
   </component>
