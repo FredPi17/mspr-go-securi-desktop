@@ -4,18 +4,27 @@ import classes.Users;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
+import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ListView;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import classes.Materiaux;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
+import java.beans.SimpleBeanInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -62,10 +71,26 @@ public class MaterielController {
         LstComparaisonMateriaux = FXCollections.observableArrayList(list);
         lstMateriel.setItems(LstComparaisonMateriaux);
 
-        //Put check in checkboxes
-        lstMateriel.setCellFactory(
-            CheckBoxListCell.forListView(Materiaux::isUsedProperty)
-        );
+        //Put check in checkboxes and disable out of stock items
+        lstMateriel.setCellFactory(listview -> {
+            CheckBoxListCell<Materiaux> cell = new CheckBoxListCell<>();
+            cell.setSelectedStateCallback(Materiaux::isUsedProperty);
+
+            cell.itemProperty().addListener((observable, oldValue, newValue) -> {
+                if(cell.getItem() != null){
+                    //disable if out of stock and not in used
+                    cell.setDisable(cell.getItem().isOutOfStock() && !cell.getItem().isUsed());
+                    if(cell.isDisabled()){
+                        cell.setTextFill(Color.GRAY);
+                    }
+                    else {
+                        cell.setTextFill(Color.BLACK);
+                    }
+                }
+            });
+
+            return cell;
+        });
 
         Predicate<Materiaux> isChecked = Materiaux::isUsed;
         LstComparaisonMateriaux = lstMateriel.getItems().filtered(isChecked);

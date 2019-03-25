@@ -4,9 +4,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.IdentificationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.IdentificationController">
    <children>
-      <Button id="captureButton" fx:id="captureButton" defaultButton="true" layoutX="461.0" layoutY="62.0" mnemonicParsing="false" onAction="#searchDataBase" prefHeight="47.0" prefWidth="125.0" text="S'identifier" textAlignment="CENTER" />
-      <ImageView id="imageViewWebcam" fx:id="imageViewWebcam" fitHeight="256.0" fitWidth="300.0" layoutX="73.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
+      <Button id="captureButton" fx:id="captureButton" defaultButton="true" layoutX="450.0" layoutY="60.0" mnemonicParsing="false" onAction="#searchDataBase" prefHeight="50.0" prefWidth="125.0" text="S'identifier" textAlignment="CENTER" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+      <ImageView id="imageViewWebcam" fx:id="imageViewWebcam" fitHeight="360.0" fitWidth="415.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="20.0" />
    </children>
 </AnchorPane>
