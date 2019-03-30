@@ -3,6 +3,8 @@ package sample;
 import classes.Users;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
+import javafx.scene.control.Alert;
+import org.opencv.imgcodecs.Imgcodecs;
 import utils.Utils;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -17,6 +19,10 @@ import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.objdetect.Objdetect;
 import org.opencv.videoio.VideoCapture;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -51,11 +57,36 @@ public class IdentificationController {
         //Get base de donnée
         Firestore db = FirestoreClient.getFirestore();
 
-        //takePicture()
-        Users user = new Users("Agent1", "Agent1", "Agent1");
+
         Mat imageAComparer = grabFrame();
-        stopAcquisition();
-        Controller.ChangeStage(event,getClass(), user);
+        Rect[] faces = null;
+        faces = this.detectFaces(imageAComparer);
+        switch (faces.length)
+        {
+            case 0:
+                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                alert1.setTitle("Erreur d'authentification");
+                alert1.setHeaderText(null);
+                alert1.setContentText("Aucun visage detecté !");
+
+                alert1.showAndWait();
+                break;
+            case 1:
+                Mat visageDetecte = new Mat(imageAComparer,faces[0]);
+                Imgcodecs.imwrite("test.jpg", visageDetecte);
+                Users user = new Users("Agent1", "Agent1", "Agent1");
+                stopAcquisition();
+                Controller.ChangeStage(event,getClass(), user);
+                break;
+            default:
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setTitle("Erreur d'authentification");
+                alert2.setHeaderText(null);
+                alert2.setContentText("Plusieurs visages détectés, veuillez présenter uniquement le visage de la personne voulant s'authentifier!");
+
+                alert2.showAndWait();
+
+        }
     }
 
     @FXML
@@ -131,8 +162,12 @@ public class IdentificationController {
                 // if the frame is not empty, process it
                 if (!frame.empty())
                 {
+                    Rect[] facesArray = this.detectFaces(frame);
                     // face detection
-                    this.detectAndDisplay(frame);
+                    if (facesArray.length != 0)
+                    {
+                        this.displayFaces(frame,facesArray);
+                    }
                 }
 
             }
@@ -152,7 +187,7 @@ public class IdentificationController {
      * @param frame
      *            it looks for faces in this frame
      */
-    private void detectAndDisplay(Mat frame)
+    private Rect[] detectFaces(Mat frame)
     {
         MatOfRect faces = new MatOfRect();
         Mat grayFrame = new Mat();
@@ -178,9 +213,15 @@ public class IdentificationController {
 
         // each rectangle in faces is a face: draw them!
         Rect[] facesArray = faces.toArray();
+
+        return facesArray;
+
+    }
+
+    private void displayFaces(Mat frame, Rect[] facesArray)
+    {
         for (int i = 0; i < facesArray.length; i++)
             Imgproc.rectangle(frame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0), 3);
-
     }
 
     /**
