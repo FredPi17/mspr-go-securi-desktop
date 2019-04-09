@@ -1,30 +1,21 @@
 package sample;
 
+import classes.Materiaux;
 import classes.Users;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
+import com.google.cloud.storage.Bucket;
 import com.google.firebase.cloud.FirestoreClient;
-import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-
-import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.cell.CheckBoxListCell;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import classes.Materiaux;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.util.Callback;
 
-import java.beans.SimpleBeanInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -37,6 +28,7 @@ public class MaterielController {
 
     private Users CurUser;
     private Firestore db;
+    private Bucket bucket;
     private ObservableList<Materiaux> LstComparaisonMateriaux;
 
     @FXML
@@ -59,8 +51,8 @@ public class MaterielController {
     @FXML
     private void initialize() {
         System.out.println("Demarrage de la page Materiel");
-        Image image = new Image("eyes.jpg");
-        ImgVPhotoUtilisateur.setImage(image);
+        //Image image = new Image("eyes.jpg");
+        //ImgVPhotoUtilisateur.setImage(image);
         ArrayList<Materiaux> list = new ArrayList<Materiaux>();
         ObservableList<Materiaux> ObListMateriaux = FXCollections.observableArrayList(list);
         lstMateriel.setItems(ObListMateriaux);
@@ -97,6 +89,7 @@ public class MaterielController {
     }
 
     private void SaveBaseDeDonnee() {
+
 
         //Recuperation des materiaux qui sont Cocher
         Predicate<Materiaux> isChecked = Materiaux::isUsed;
