@@ -1,11 +1,11 @@
 package sample;
 
 import classes.Users;
-import com.github.wihoho.Trainer;
-import com.github.wihoho.constant.FeatureType;
-import com.github.wihoho.jama.*;
-import com.github.wihoho.training.CosineDissimilarity;
-import com.github.wihoho.training.FileManager;
+import FaceReco.Trainer;
+import FaceReco.constant.FeatureType;
+import FaceReco.jama.*;
+import FaceReco.training.CosineDissimilarity;
+import FaceReco.training.FileManager;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
 import javafx.scene.control.Alert;

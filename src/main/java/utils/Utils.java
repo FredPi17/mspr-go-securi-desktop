@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
-import com.github.wihoho.jama.Matrix;
+import FaceReco.jama.Matrix;
 import org.opencv.core.Mat;
 
 import javafx.application.Platform;
