@@ -38,6 +38,8 @@ import java.util.concurrent.TimeUnit;
 
 public class IdentificationController {
 
+    Trainer trainer = null;
+
     @FXML
     private Button captureButton;
 
@@ -90,60 +92,59 @@ public class IdentificationController {
 
                 // convert the frame in gray scale
                 Imgproc.cvtColor(visageDetecte, visageDetecte, Imgproc.COLOR_BGR2GRAY);
-                Size sz = new Size(255,255);
+                Size sz = new Size(512,512);
                 Imgproc.resize( visageDetecte, visageDetecte, sz );
 
                 Imgcodecs.imwrite(tempname + ".pgm", visageDetecte);
 
                 Trainer trainer = Trainer.builder()
                         .metric(new CosineDissimilarity())
-                        .featureType(FeatureType.PCA)
+                        .featureType(FeatureType.LDA)
                         .numberOfComponents(3)
                         .k(1)
                         .build();
 
-                String paul0 = "paul0.pgm";
-                String paul1 = "paul1.pgm";
-                String paul2 = "paul2.pgm";
-                String paul3 = "paul3.pgm";
-                String paul4 = "paul4.pgm";
-                String paul5 = "paul5.pgm";
-                String sandra0 = "sandra0.pgm";
-                String sandra1 = "sandra1.pgm";
-                String sandra2 = "sandra2.pgm";
-                String sandra3 = "sandra3.pgm";
-                String sandra4 = "sandra4.pgm";
-                String sandra5 = "sandra5.pgm";
+                String[] paul = {"", "", "", "", "", ""};
+                String[] guilhem = {"", "", "", "", "", ""};
+                String[] fred = {"", "", "", "", "", ""};
+                String[] hugo = {"", "", "", "", "", ""};
+                String[] elsa = {"", "", "", "", "", ""};
+                for (i=0 ; i<6 ; i++)
+                {
+                    paul[i] = "paul" + i + ".pgm";
+                    guilhem[i] = "guilhem" + i + ".pgm";
+                    fred[i] = "fred" + i + ".pgm";
+                    hugo[i] = "hugo" + i + ".pgm";
+                    elsa[i] = "elsa" + i + ".pgm";
+                }
 
                 String userRecognized = null;
 
                 // add training data
                 try {
 
-                    trainer.add(convertToMatrix(paul0), "Paul");
-                    trainer.add(convertToMatrix(paul1), "Paul");
-                    trainer.add(convertToMatrix(paul2), "Paul");
-                    trainer.add(convertToMatrix(paul3), "Paul");
-                    trainer.add(convertToMatrix(paul4), "Paul");
-                    trainer.add(convertToMatrix(paul5), "Paul");
-                    trainer.add(convertToMatrix(sandra0), "Sandra");
-                    trainer.add(convertToMatrix(sandra1), "Sandra");
-                    trainer.add(convertToMatrix(sandra2), "Sandra");
-                    trainer.add(convertToMatrix(sandra3), "Sandra");
-                    trainer.add(convertToMatrix(sandra4), "Sandra");
-                    trainer.add(convertToMatrix(sandra5), "Sandra");
+                    for (i = 0; i < 6 ; i++)
+                    {
+
+                        trainer.add(convertToMatrix(paul[i]), "Paul");
+                        trainer.add(convertToMatrix(guilhem[i]), "Guilhem");
+                        trainer.add(convertToMatrix(hugo[i]), "Hugo");
+                        trainer.add(convertToMatrix(fred[i]), "Fred");
+                        trainer.add(convertToMatrix(elsa[i]), "Elsa");
+                    }
 
 
                     trainer.train();
 
                     userRecognized = trainer.recognize(convertToMatrix(tempname + ".pgm"));
+                    System.out.println(userRecognized);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
 
                 Users user = new Users("Unknown", "Unknown", "Unknown");
-                if (userRecognized != null) {
+                if (userRecognized != null && userRecognized != "") {
                     user = new Users(userRecognized, userRecognized, userRecognized);
                 }
                 stopAcquisition();

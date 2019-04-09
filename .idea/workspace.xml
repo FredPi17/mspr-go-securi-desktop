@@ -2,27 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f492f166-5253-4b79-ae9a-231d181ab51b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_wihoho_face_recognition_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_16_10.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_mac_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_linux_11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_mac_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_linux_11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_mac_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_linux_11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_mac_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_linux_11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mspr_go_securi_desktop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/mspr_go_securi_desktop.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paul0.pgm" beforeDir="false" afterPath="$PROJECT_DIR$/paul0.pgm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paul1.pgm" beforeDir="false" afterPath="$PROJECT_DIR$/paul1.pgm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paul2.pgm" beforeDir="false" afterPath="$PROJECT_DIR$/paul2.pgm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paul3.pgm" beforeDir="false" afterPath="$PROJECT_DIR$/paul3.pgm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paul4.pgm" beforeDir="false" afterPath="$PROJECT_DIR$/paul4.pgm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paul5.pgm" beforeDir="false" afterPath="$PROJECT_DIR$/paul5.pgm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sandra0.pgm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sandra1.pgm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sandra2.pgm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sandra3.pgm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sandra4.pgm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sandra5.pgm" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sample/IdentificationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/IdentificationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/mspr_go_securi_desktop.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/it/polito/elite/teaching/cv/utils/Utils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/it/polito/teaching/cv/FaceDetection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/it/polito/teaching/cv/FaceDetectionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sample/IdentificationController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/IdentificationController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sample/IdentificationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/IdentificationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.pgm" beforeDir="false" afterPath="$PROJECT_DIR$/test.pgm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test0.pgm" beforeDir="false" afterPath="$PROJECT_DIR$/test0.pgm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test1.pgm" beforeDir="false" afterPath="$PROJECT_DIR$/test1.pgm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2.pgm" beforeDir="false" afterPath="$PROJECT_DIR$/test2.pgm" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,26 +38,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Materiel.fxml">
-          <provider selected="true" editor-type-id="text-editor" />
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Identification.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+            <state relative-caret-position="347">
+              <caret line="35" column="33" lean-forward="true" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -68,12 +49,36 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/sample/IdentificationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="149" column="74" selection-start-line="149" selection-start-column="74" selection-end-line="149" selection-end-column="74" />
+            <state relative-caret-position="-20">
+              <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="105" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#12297#12298#0" expanded="true" />
-                <element signature="e#12452#12453#0" expanded="true" />
+                <element signature="e#12061#12062#0" expanded="true" />
+                <element signature="e#12216#12217#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/MaterielController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="615">
+              <caret line="63" column="39" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -82,16 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/com/github/wihoho/face-recognition/1.0/face-recognition-1.0.jar!/com/github/wihoho/jama/Matrix.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
+            <state relative-caret-position="5505">
               <caret line="394" selection-start-line="394" selection-end-line="394" />
-              <folding>
-                <element signature="e#2844#2845#0" expanded="true" />
-                <element signature="e#2873#2874#0" expanded="true" />
-                <element signature="e#3759#3760#0" expanded="true" />
-                <element signature="e#3788#3789#0" expanded="true" />
-                <element signature="e#3827#3828#0" expanded="true" />
-                <element signature="e#3856#3857#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -99,7 +96,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/com/github/wihoho/face-recognition/1.0/face-recognition-1.0.jar!/com/github/wihoho/Trainer.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
+            <state relative-caret-position="705">
               <caret line="61" selection-start-line="61" selection-end-line="61" />
             </state>
           </provider>
@@ -108,11 +105,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/com/github/wihoho/face-recognition/1.0/face-recognition-1.0.jar!/com/github/wihoho/training/PCA.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
+            <state relative-caret-position="556">
               <caret line="112" selection-start-line="112" selection-end-line="112" />
               <folding>
-                <element signature="e#3408#3409#0" expanded="true" />
-                <element signature="e#3437#3438#0" expanded="true" />
                 <element signature="e#3635#3636#0" expanded="true" />
               </folding>
             </state>
@@ -122,7 +117,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/utils/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
+            <state relative-caret-position="1335">
               <caret line="102" selection-start-line="102" selection-end-line="102" />
             </state>
           </provider>
@@ -131,7 +126,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar:///usr/lib/jvm/jdk1.8.0_201/src.zip!/java/util/Scanner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
+            <state relative-caret-position="29970">
               <caret line="2075" column="15" selection-start-line="2075" selection-start-column="15" selection-end-line="2075" selection-end-column="15" />
               <folding>
                 <element signature="e#78006#78007#0" expanded="true" />
@@ -144,7 +139,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/com/github/wihoho/face-recognition/1.0/face-recognition-1.0.jar!/com/github/wihoho/training/FileManager.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
+            <state relative-caret-position="210">
               <caret line="25" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
@@ -305,17 +300,19 @@
       <workItem from="1553435188195" duration="650000" />
       <workItem from="1553435843094" duration="464000" />
       <workItem from="1553436376288" duration="367000" />
+      <workItem from="1554703374518" duration="38000" />
+      <workItem from="1554790622954" duration="2572000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9155000" />
+    <option name="totallyTimeSpent" value="13027000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1020" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25587606" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26228634" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -324,7 +321,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.68070817" visible="true" weight="0.23435722" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.68070817" visible="true" weight="0.23435722" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3993174" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -364,23 +361,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/MaterielController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="63" column="39" lean-forward="true" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/eyes.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -395,16 +375,16 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Materiel.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Identification.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Jenkinsfile">
       <provider selected="true" editor-type-id="text-editor">
@@ -413,16 +393,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+        <state relative-caret-position="60">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/MaterielController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="63" column="39" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/wihoho/face-recognition/1.0/face-recognition-1.0.jar!/com/github/wihoho/jama/Matrix.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5505">
+          <caret line="394" selection-start-line="394" selection-end-line="394" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/wihoho/face-recognition/1.0/face-recognition-1.0.jar!/com/github/wihoho/Trainer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utils/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1335">
+          <caret line="102" selection-start-line="102" selection-end-line="102" />
         </state>
       </provider>
     </entry>
     <entry file="jar:///usr/lib/jvm/jdk1.8.0_201/src.zip!/java/util/Scanner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
+        <state relative-caret-position="29970">
           <caret line="2075" column="15" selection-start-line="2075" selection-start-column="15" selection-end-line="2075" selection-end-column="15" />
           <folding>
             <element signature="e#78006#78007#0" expanded="true" />
@@ -433,60 +447,36 @@
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/github/wihoho/face-recognition/1.0/face-recognition-1.0.jar!/com/github/wihoho/training/FileManager.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
+        <state relative-caret-position="210">
           <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utils/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="102" selection-start-line="102" selection-end-line="102" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/github/wihoho/face-recognition/1.0/face-recognition-1.0.jar!/com/github/wihoho/training/PCA.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
+        <state relative-caret-position="556">
           <caret line="112" selection-start-line="112" selection-end-line="112" />
           <folding>
-            <element signature="e#3408#3409#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
             <element signature="e#3635#3636#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/wihoho/face-recognition/1.0/face-recognition-1.0.jar!/com/github/wihoho/jama/Matrix.class">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="394" selection-start-line="394" selection-end-line="394" />
-          <folding>
-            <element signature="e#2844#2845#0" expanded="true" />
-            <element signature="e#2873#2874#0" expanded="true" />
-            <element signature="e#3759#3760#0" expanded="true" />
-            <element signature="e#3788#3789#0" expanded="true" />
-            <element signature="e#3827#3828#0" expanded="true" />
-            <element signature="e#3856#3857#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/wihoho/face-recognition/1.0/face-recognition-1.0.jar!/com/github/wihoho/Trainer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        <state relative-caret-position="347">
+          <caret line="35" column="33" lean-forward="true" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/IdentificationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="149" column="74" selection-start-line="149" selection-start-column="74" selection-end-line="149" selection-end-column="74" />
+        <state relative-caret-position="-20">
+          <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="105" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#12297#12298#0" expanded="true" />
-            <element signature="e#12452#12453#0" expanded="true" />
+            <element signature="e#12061#12062#0" expanded="true" />
+            <element signature="e#12216#12217#0" expanded="true" />
           </folding>
         </state>
       </provider>
