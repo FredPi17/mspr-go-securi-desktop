@@ -81,12 +81,11 @@ public class KNN {
 			}
 		}
 
-		System.out.println(maxSimilarity);
-		if (maxSimilarity > 0.85) {
+		if (maxSimilarity > 0.90) {
 			return returnLabel;
 		}
 		else {
-			return "error";
+			return "ATTENTION : Utilisateur inconnu, veuillez contacter un administrateur. Le sas va désormais se verrouiller en attendant que la sécurité arrive.";
 		}
 	}
 }
