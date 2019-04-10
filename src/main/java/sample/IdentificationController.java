@@ -5,7 +5,6 @@ import FaceReco.Trainer;
 import FaceReco.constant.FeatureType;
 import FaceReco.jama.*;
 import FaceReco.training.CosineDissimilarity;
-import FaceReco.training.FileManager;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
 import javafx.scene.control.Alert;
@@ -24,13 +23,9 @@ import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.objdetect.Objdetect;
 import org.opencv.videoio.VideoCapture;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -62,11 +57,12 @@ public class IdentificationController {
     private CascadeClassifier faceCascade;
     private int absoluteFaceSize;
 
+    Trainer trainerface;
+
     @FXML
     private void searchDataBase(ActionEvent event) {
         //Get base de donnée
         Firestore db = FirestoreClient.getFirestore();
-
 
         Mat imageAComparer = grabFrame();
         Rect[] faces = null;
@@ -97,47 +93,11 @@ public class IdentificationController {
 
                 Imgcodecs.imwrite(tempname + ".pgm", visageDetecte);
 
-                Trainer trainer = Trainer.builder()
-                        .metric(new CosineDissimilarity())
-                        .featureType(FeatureType.LDA)
-                        .numberOfComponents(3)
-                        .k(1)
-                        .build();
-
-                String[] paul = {"", "", "", "", "", ""};
-                String[] guilhem = {"", "", "", "", "", ""};
-                String[] fred = {"", "", "", "", "", ""};
-                String[] hugo = {"", "", "", "", "", ""};
-                String[] elsa = {"", "", "", "", "", ""};
-                for (i=0 ; i<6 ; i++)
-                {
-                    paul[i] = "paul" + i + ".pgm";
-                    guilhem[i] = "guilhem" + i + ".pgm";
-                    fred[i] = "fred" + i + ".pgm";
-                    hugo[i] = "hugo" + i + ".pgm";
-                    elsa[i] = "elsa" + i + ".pgm";
-                }
-
                 String userRecognized = null;
 
                 // add training data
                 try {
-
-                    for (i = 0; i < 6 ; i++)
-                    {
-
-                        trainer.add(convertToMatrix(paul[i]), "Paul");
-                        trainer.add(convertToMatrix(guilhem[i]), "Guilhem");
-                        trainer.add(convertToMatrix(hugo[i]), "Hugo");
-                        trainer.add(convertToMatrix(fred[i]), "Fred");
-                        trainer.add(convertToMatrix(elsa[i]), "Elsa");
-                    }
-
-
-                    trainer.train();
-
-                    userRecognized = trainer.recognize(convertToMatrix(tempname + ".pgm"));
-                    System.out.println(userRecognized);
+                    userRecognized = trainerface.recognize(convertToMatrix(tempname + ".pgm"));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -147,9 +107,34 @@ public class IdentificationController {
                 if (userRecognized != null && userRecognized != "") {
                     user = new Users(userRecognized, userRecognized, userRecognized);
                 }
-                stopAcquisition();
-                Controller.ChangeStage(event, getClass(), user);
-                break;
+
+                if (userRecognized.startsWith("ATTENTION")
+                ) {
+                    Alert alert3 = new Alert(Alert.AlertType.WARNING);
+                    alert3.setTitle("Erreur d'authentification");
+                    alert3.setHeight(300);
+                    alert3.setWidth(500);
+                    alert3.setResizable(true);
+                    alert3.getDialogPane().setPrefSize(480, 220);
+                    alert3.setHeaderText(null);
+                    alert3.setContentText(userRecognized);
+
+                    alert3.showAndWait();
+                    break;
+                }
+                else{
+                    Alert alert4 = new Alert(Alert.AlertType.INFORMATION);
+                    alert4.setHeight(500);
+                    alert4.setWidth(500);
+                    alert4.setTitle("Authentification réussie");
+                    alert4.setHeaderText(null);
+                    alert4.setContentText("Bonjour, " +userRecognized);
+                    alert4.showAndWait();
+                    stopAcquisition();
+                    Controller.ChangeStage(event, getClass(), user);
+                    break;
+                }
+
             default:
                 Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                 alert2.setTitle("Erreur d'authentification");
@@ -165,11 +150,51 @@ public class IdentificationController {
     private void initialize() {
         System.out.println("Demarrage de la page d'identification");
 
-        // disable setting checkboxes
-        //this.haarClassifier.setDisable(true);
-        //this.lbpClassifier.setDisable(true);
+        try {
+            this.trainerface = Trainer.builder()
+                    .metric(new CosineDissimilarity())
+                    .featureType(FeatureType.LDA)
+                    .numberOfComponents(3)
+                    .k(1)
+                    .build();
 
-        //this.checkboxSelection("resources/haarcascades/haarcascade_frontalface_alt.xml");
+            ArrayList<String> paul = new ArrayList<>();
+            ArrayList<String> guilhem = new ArrayList<>();
+            ArrayList<String> fred = new ArrayList<>();
+            ArrayList<String> hugo = new ArrayList<>();
+            ArrayList<String> elsa = new ArrayList<>();
+
+            for (int i = 0; i < 7; i++) {
+                paul.add("paul" + i + ".pgm");
+                guilhem.add("guilhem" + i + ".pgm");
+                fred.add("fred" + i + ".pgm");
+                hugo.add("hugo" + i + ".pgm");
+                elsa.add("elsa" + i + ".pgm");
+            }
+
+            for (int i = 0; i < 7; i++) {
+                if (paul.size() > i + 1) {
+                    trainerface.add(convertToMatrix(paul.get(i)), "Paul");
+                }
+                if (guilhem.size() > i + 1) {
+                    trainerface.add(convertToMatrix(guilhem.get(i)), "Guilhem");
+                }
+                if (fred.size() > i + 1) {
+                    trainerface.add(convertToMatrix(fred.get(i)), "Fred");
+                }
+                if (hugo.size() > i + 1) {
+                    trainerface.add(convertToMatrix(hugo.get(i)), "Hugo");
+                }
+                if (elsa.size() > i + 1) {
+                    trainerface.add(convertToMatrix(elsa.get(i)), "Elsa");
+                }
+            }
+
+
+            trainerface.train();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         this.capture = new VideoCapture();
         this.faceCascade = new CascadeClassifier();
