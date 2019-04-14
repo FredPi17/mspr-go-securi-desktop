@@ -800,7 +800,9 @@ public class EigenvalueDecomposition implements java.io.Serializable {
                         vr = eps * norm * (Math.abs(w) + Math.abs(q) +
                         Math.abs(x) + Math.abs(y) + Math.abs(z));
                      }
-                     cdiv(x*r-z*ra+q*sa,x*s-z*sa-q*ra,vr,vi);
+                     if (vr != 0) {
+                        cdiv(x * r - z * ra + q * sa, x * s - z * sa - q * ra, vr, vi);
+                     }
                      H[i][n-1] = cdivr;
                      H[i][n] = cdivi;
                      if (Math.abs(x) > (Math.abs(z) + Math.abs(q))) {

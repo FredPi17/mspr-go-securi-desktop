@@ -15,37 +15,57 @@ import java.util.Scanner;
 public class FileManager {
     // Convert PGM to Matrix
     public static Matrix convertPGMtoMatrix(String address) throws IOException {
+        double[][] data2D = null;
         FileInputStream fileInputStream = new FileInputStream(address);
         Scanner scan = new Scanner(fileInputStream);
+        try {
 
-        // Discard the magic number
-        scan.nextLine();
-        // Read pic width, height and max value
-        int picWidth = scan.nextInt();
-        int picHeight = scan.nextInt();
+            // Discard the magic number
+            scan.nextLine();
+            // Read pic width, height and max value
+            int picWidth = scan.nextInt();
+            int picHeight = scan.nextInt();
 
-        fileInputStream.close();
+            fileInputStream.close();
 
-        // Now parse the file as binary data
-        fileInputStream = new FileInputStream(address);
-        DataInputStream dis = new DataInputStream(fileInputStream);
+            // Now parse the file as binary data
+            fileInputStream = new FileInputStream(address);
 
-        // look for 4 lines (i.e.: the header) and discard them
-        int numnewlines = 3;
-        while (numnewlines > 0) {
-            char c;
-            do {
-                c = (char) (dis.readUnsignedByte());
-            } while (c != '\n');
-            numnewlines--;
-        }
+            DataInputStream dis = new DataInputStream(fileInputStream);
+            try {
+                // look for 4 lines (i.e.: the header) and discard them
+                int numnewlines = 3;
+                while (numnewlines > 0) {
+                    char c;
+                    do {
+                        c = (char) (dis.readUnsignedByte());
+                    } while (c != '\n');
+                    numnewlines--;
+                }
 
-        // read the image data
-        double[][] data2D = new double[picHeight][picWidth];
-        for (int row = 0; row < picHeight; row++) {
-            for (int col = 0; col < picWidth; col++) {
-                data2D[row][col] = dis.readUnsignedByte();
+                // read the image data
+                data2D = new double[picHeight][picWidth];
+                for (int row = 0; row < picHeight; row++) {
+                    for (int col = 0; col < picWidth; col++) {
+                        data2D[row][col] = dis.readUnsignedByte();
+                    }
+                }
             }
+            catch (Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+            finally {
+                dis.close();
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        finally
+        {
+            scan.close();
         }
 
         return new Matrix(data2D);

@@ -41,11 +41,6 @@ public class IdentificationController {
     @FXML
     private ImageView originalFrame;
 
-    @FXML
-    private CheckBox haarClassifier;
-    @FXML
-    private CheckBox lbpClassifier;
-
     // a timer for acquiring the video stream
     private ScheduledExecutorService timer;
     // the OpenCV object that performs the video capture
@@ -58,6 +53,51 @@ public class IdentificationController {
     private int absoluteFaceSize;
 
     Trainer trainerface;
+
+    @FXML
+    private void initialize() {
+        System.out.println("Demarrage de la page d'identification");
+
+        recoFaceInit();
+
+        this.capture = new VideoCapture();
+        this.faceCascade = new CascadeClassifier();
+        this.absoluteFaceSize = 0;
+
+        // set a fixed width for the frame
+        originalFrame.setFitWidth(600);
+        // preserve image ratio
+        originalFrame.setPreserveRatio(true);
+        // start the video capture
+        this.capture.open(0);
+
+        // is the video stream available?
+        if (this.capture.isOpened()) {
+            this.checkboxSelection("resources/lbpcascades/lbpcascade_frontalface.xml");
+            this.cameraActive = true;
+
+            // grab a frame every 33 ms (30 frames/sec)
+            Runnable frameGrabber = new Runnable() {
+
+                @Override
+                public void run() {
+                    // effectively grab and process a single frame
+                    Mat frame = grabFrame();
+                    // convert and show the frame
+                    Image imageToShow = Utils.mat2Image(frame);
+                    updateImageView(originalFrame, imageToShow);
+                }
+            };
+
+            this.timer = Executors.newSingleThreadScheduledExecutor();
+            this.timer.scheduleAtFixedRate(frameGrabber, 0, 33, TimeUnit.MILLISECONDS);
+
+        } else {
+            // log the error
+            System.err.println("Failed to open the camera connection...");
+        }
+
+    }
 
     @FXML
     private void searchDataBase(ActionEvent event) {
@@ -104,11 +144,11 @@ public class IdentificationController {
 
 
                 Users user = new Users("Unknown", "Unknown", "Unknown");
-                if (userRecognized != null && userRecognized != "") {
+                if (userRecognized != null) {
                     user = new Users(userRecognized, userRecognized, userRecognized);
                 }
 
-                if (userRecognized.startsWith("ATTENTION")
+                if (userRecognized != null && userRecognized.startsWith("ATTENTION")
                 ) {
                     Alert alert3 = new Alert(Alert.AlertType.WARNING);
                     alert3.setTitle("Erreur d'authentification");
@@ -146,9 +186,9 @@ public class IdentificationController {
         }
     }
 
-    @FXML
-    private void initialize() {
-        System.out.println("Demarrage de la page d'identification");
+    private void recoFaceInit() {
+        System.out.println("Initialisation du module de reconnaissance faciale...");
+        System.out.println("Ajout des données au module");
 
         try {
             this.trainerface = Trainer.builder()
@@ -158,81 +198,21 @@ public class IdentificationController {
                     .k(1)
                     .build();
 
-            ArrayList<String> paul = new ArrayList<>();
-            ArrayList<String> guilhem = new ArrayList<>();
-            ArrayList<String> fred = new ArrayList<>();
-            ArrayList<String> hugo = new ArrayList<>();
-            ArrayList<String> elsa = new ArrayList<>();
-
             for (int i = 0; i < 7; i++) {
-                paul.add("paul" + i + ".pgm");
-                guilhem.add("guilhem" + i + ".pgm");
-                fred.add("fred" + i + ".pgm");
-                hugo.add("hugo" + i + ".pgm");
-                elsa.add("elsa" + i + ".pgm");
+                trainerface.add(convertToMatrix("paul" + i + ".pgm"), "Paul");
+                trainerface.add(convertToMatrix("guilhem" + i + ".pgm"), "Guilhem");
+                trainerface.add(convertToMatrix("fred" + i + ".pgm"), "Fred");
+                trainerface.add(convertToMatrix("hugo" + i + ".pgm"), "Hugo");
+                trainerface.add(convertToMatrix("elsa" + i + ".pgm"), "Elsa");
             }
 
-            for (int i = 0; i < 7; i++) {
-                if (paul.size() > i + 1) {
-                    trainerface.add(convertToMatrix(paul.get(i)), "Paul");
-                }
-                if (guilhem.size() > i + 1) {
-                    trainerface.add(convertToMatrix(guilhem.get(i)), "Guilhem");
-                }
-                if (fred.size() > i + 1) {
-                    trainerface.add(convertToMatrix(fred.get(i)), "Fred");
-                }
-                if (hugo.size() > i + 1) {
-                    trainerface.add(convertToMatrix(hugo.get(i)), "Hugo");
-                }
-                if (elsa.size() > i + 1) {
-                    trainerface.add(convertToMatrix(elsa.get(i)), "Elsa");
-                }
-            }
-
+            System.out.println("Entrainement du module...");
 
             trainerface.train();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-        this.capture = new VideoCapture();
-        this.faceCascade = new CascadeClassifier();
-        this.absoluteFaceSize = 0;
-
-        // set a fixed width for the frame
-        originalFrame.setFitWidth(600);
-        // preserve image ratio
-        originalFrame.setPreserveRatio(true);
-        // start the video capture
-        this.capture.open(0);
-
-        // is the video stream available?
-        if (this.capture.isOpened()) {
-            this.checkboxSelection("resources/lbpcascades/lbpcascade_frontalface.xml");
-            this.cameraActive = true;
-
-            // grab a frame every 33 ms (30 frames/sec)
-            Runnable frameGrabber = new Runnable() {
-
-                @Override
-                public void run() {
-                    // effectively grab and process a single frame
-                    Mat frame = grabFrame();
-                    // convert and show the frame
-                    Image imageToShow = Utils.mat2Image(frame);
-                    updateImageView(originalFrame, imageToShow);
-                }
-            };
-
-            this.timer = Executors.newSingleThreadScheduledExecutor();
-            this.timer.scheduleAtFixedRate(frameGrabber, 0, 33, TimeUnit.MILLISECONDS);
-
-        } else {
-            // log the error
-            System.err.println("Failed to open the camera connection...");
-        }
-
     }
 
     /**
@@ -293,42 +273,13 @@ public class IdentificationController {
         this.faceCascade.detectMultiScale(grayFrame, faces, 1.1, 2, 0 | Objdetect.CASCADE_SCALE_IMAGE,
                 new Size(this.absoluteFaceSize, this.absoluteFaceSize), new Size());
 
-        // each rectangle in faces is a face: draw them!
-        Rect[] facesArray = faces.toArray();
-
-        return facesArray;
+        return faces.toArray();
 
     }
 
     private void displayFaces(Mat frame, Rect[] facesArray) {
         for (int i = 0; i < facesArray.length; i++)
             Imgproc.rectangle(frame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0), 3);
-    }
-
-    /**
-     * The action triggered by selecting the Haar Classifier checkbox. It loads
-     * the trained set to be used for frontal face detection.
-     */
-    @FXML
-    protected void haarSelected(Event event) {
-        // check whether the lpb checkbox is selected and deselect it
-        if (this.lbpClassifier.isSelected())
-            this.lbpClassifier.setSelected(false);
-
-        this.checkboxSelection("resources/haarcascades/haarcascade_frontalface_alt.xml");
-    }
-
-    /**
-     * The action triggered by selecting the LBP Classifier checkbox. It loads
-     * the trained set to be used for frontal face detection.
-     */
-    @FXML
-    protected void lbpSelected(Event event) {
-        // check whether the haar checkbox is selected and deselect it
-        if (this.haarClassifier.isSelected())
-            this.haarClassifier.setSelected(false);
-
-        this.checkboxSelection("resources/lbpcascades/lbpcascade_frontalface.xml");
     }
 
     /**
@@ -356,6 +307,7 @@ public class IdentificationController {
             } catch (InterruptedException e) {
                 // log any exception
                 System.err.println("Exception in stopping the frame capture, trying to release the camera now... " + e);
+                return ;
             }
         }
 
@@ -373,14 +325,6 @@ public class IdentificationController {
      */
     private void updateImageView(ImageView view, Image image) {
         Utils.onFXThread(view.imageProperty(), image);
-    }
-
-
-    /**
-     * On application close, stop the acquisition from the camera
-     */
-    protected void setClosed() {
-        this.stopAcquisition();
     }
 
     private Matrix convertToMatrix(String fileAddress) throws IOException {

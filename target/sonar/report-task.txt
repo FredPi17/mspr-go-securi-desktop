@@ -1,0 +1,6 @@
+projectKey=MSPR_go_securi_desktop
+serverUrl=http://raspberrysqlserver.ddns.net:9000
+serverVersion=7.6.0.21501
+dashboardUrl=http://raspberrysqlserver.ddns.net:9000/dashboard?id=MSPR_go_securi_desktop
+ceTaskId=AWoYMTiEqVh9GSHEA3fc
+ceTaskUrl=http://raspberrysqlserver.ddns.net:9000/api/ce/task?id=AWoYMTiEqVh9GSHEA3fc
