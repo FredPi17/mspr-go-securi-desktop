@@ -14,6 +14,13 @@ import java.net.URL;
 
 public class Controller {
 
+    /**
+     * Changes the page
+     *
+     * @param event
+     * @param classe
+     * @param fxmlPage
+     */
     public static void ChangeStage(ActionEvent event, Class classe, String fxmlPage){
         try {
             System.out.println("Change page");
@@ -28,6 +35,13 @@ public class Controller {
         }
     }
 
+    /**
+     * Changes the page and init data for signed in users
+     *
+     * @param event
+     * @param classe
+     * @param users
+     */
     public static void ChangeStage(ActionEvent event, Class classe, Users users){
         try {
             System.out.println("Change page");
@@ -45,6 +59,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Finish the current stage
+     *
+     * @param root
+     */
     public static void FinishStage(Parent root){
         Stage stage = new Stage();
         stage.setTitle("Go Securi");

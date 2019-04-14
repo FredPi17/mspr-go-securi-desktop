@@ -50,6 +50,10 @@
             <artifactId>face-recognition</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>11</version>
+        </dependency>
     </dependencies>
-    
 </project>

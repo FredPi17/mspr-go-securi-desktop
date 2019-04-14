@@ -54,6 +54,9 @@ public class IdentificationController {
 
     Trainer trainerface;
 
+    /**
+     * Initialize method, starts when the controller is called
+     */
     @FXML
     private void initialize() {
         System.out.println("Demarrage de la page d'identification");
@@ -99,6 +102,11 @@ public class IdentificationController {
 
     }
 
+    /**
+     * Search the face picture into firebase and manage the user connection
+     *
+     * @param event the click on the identification button
+     */
     @FXML
     private void searchDataBase(ActionEvent event) {
         //Get base de donnée
@@ -186,6 +194,9 @@ public class IdentificationController {
         }
     }
 
+    /**
+     * Train the algorithm before lauching tge face recognition
+     */
     private void recoFaceInit() {
         System.out.println("Initialisation du module de reconnaissance faciale...");
         System.out.println("Ajout des données au module");
@@ -332,7 +343,12 @@ public class IdentificationController {
         return vectorize(Utils.convertPGMtoMatrix(file.getAbsolutePath()));
     }
 
-    //Convert a m by n matrix into a m*n by 1 matrix
+    /**
+     * Convert a m by n matrix into a m*n by 1 matrix
+     *
+     * @param input matrix to convert
+     * @return the matrix converted
+     */
     static Matrix vectorize(Matrix input) {
         int m = input.getRowDimension();
         int n = input.getColumnDimension();
