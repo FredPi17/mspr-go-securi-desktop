@@ -19,7 +19,7 @@ public class Controller {
      *
      * @param event
      * @param classe
-     * @param fxmlPage
+     * @param fxmlPage the page to load
      */
     public static void ChangeStage(ActionEvent event, Class classe, String fxmlPage){
         try {
@@ -40,7 +40,7 @@ public class Controller {
      *
      * @param event
      * @param classe
-     * @param users
+     * @param users the user to get data from
      */
     public static void ChangeStage(ActionEvent event, Class classe, Users users){
         try {

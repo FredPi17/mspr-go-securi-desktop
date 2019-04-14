@@ -1,37 +1,37 @@
 package classes;
 
 public class Users {
-    private String Id;
-    private String Nom;
-    private String Prenom;
+    private String id;
+    private String nom;
+    private String prenom;
 
     public Users(String id, String nom, String prenom) {
-        Id = id;
-        Nom = nom;
-        Prenom = prenom;
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
     }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNom() {
-        return Nom;
+        return nom;
     }
 
     public void setNom(String nom) {
-        Nom = nom;
+        this.nom = nom;
     }
 
     public String getPrenom() {
-        return Prenom;
+        return prenom;
     }
 
     public void setPrenom(String prenom) {
-        Prenom = prenom;
+        this.prenom = prenom;
     }
 }

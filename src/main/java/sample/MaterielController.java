@@ -38,8 +38,8 @@ public class MaterielController {
     private ListView lstMateriel;
 
     @FXML
-    private void BackToIdentification(ActionEvent event) {
-        SaveBaseDeDonnee();
+    private void backToIdentification(ActionEvent event) {
+        SaveDatabase();
         Controller.ChangeStage(event, getClass(), "Identification.fxml");
     }
 
@@ -48,6 +48,9 @@ public class MaterielController {
         initializing();
     }
 
+    /**
+     * Initialize the material page
+     */
     @FXML
     private void initialize() {
         System.out.println("Demarrage de la page Materiel");
@@ -58,19 +61,22 @@ public class MaterielController {
         lstMateriel.setItems(ObListMateriaux);
     }
 
+    /**
+     *
+     */
     private void initializing() {
-        ArrayList<Materiaux> list = BaseDeDonnees();
+        ArrayList<Materiaux> list = database();
         LstComparaisonMateriaux = FXCollections.observableArrayList(list);
         lstMateriel.setItems(LstComparaisonMateriaux);
 
-        //Put check in checkboxes and disable out of stock items
+        // Put check in checkboxes and disable out of stock items
         lstMateriel.setCellFactory(listview -> {
             CheckBoxListCell<Materiaux> cell = new CheckBoxListCell<>();
             cell.setSelectedStateCallback(Materiaux::isUsedProperty);
 
             cell.itemProperty().addListener((observable, oldValue, newValue) -> {
                 if(cell.getItem() != null){
-                    //disable if out of stock and not in used
+                    // Disable if out of stock and not in used
                     cell.setDisable(cell.getItem().isOutOfStock() && !cell.getItem().isUsed());
                     if(cell.isDisabled()){
                         cell.setTextFill(Color.GRAY);
@@ -88,10 +94,13 @@ public class MaterielController {
         LstComparaisonMateriaux = lstMateriel.getItems().filtered(isChecked);
     }
 
-    private void SaveBaseDeDonnee() {
+    /**
+     * save the database
+     */
+    private void SaveDatabase() {
 
 
-        //Recuperation des materiaux qui sont Cocher
+        // get the checked materials
         Predicate<Materiaux> isChecked = Materiaux::isUsed;
         ObservableList<Materiaux> newlist = lstMateriel.getItems().filtered(isChecked);
 
@@ -99,7 +108,7 @@ public class MaterielController {
 
         for(Materiaux m : newlist){
             if(!LstComparaisonMateriaux.contains(m)){
-                //Ajouter a la base de donnée
+                // Add to the database
                 DocumentReference matRef = db.collection("Materiaux").document(m.getId());
                 matRef.update("Sortie", m.getSortie() + 1);
 
@@ -109,7 +118,7 @@ public class MaterielController {
 
         for(Materiaux m : LstComparaisonMateriaux){
             if(!newlist.contains(m)){
-                //Enlever de la base de donnée
+                // Remove from database
                 DocumentReference docRef = db.collection("Materiaux").document(m.getId());
                 docRef.update("Sortie", m.getSortie() - 1);
 
@@ -118,27 +127,32 @@ public class MaterielController {
         }
     }
 
-    private ArrayList<Materiaux> BaseDeDonnees() {
+    /**
+     *
+     *
+     * @return ArrayList<Materiaux>
+     */
+    private ArrayList<Materiaux> database() {
         ArrayList<Materiaux> materiaux = new ArrayList<Materiaux>();
 
         try {
-            //Get base de donnée
+            //Get database
             db = FirestoreClient.getFirestore();
 
-            //Recuper tous les materiaux
+            // Get all materials
             ApiFuture<QuerySnapshot> query = db.collection("Materiaux").get();
             QuerySnapshot querySnapshot = query.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
             for (QueryDocumentSnapshot document : documents) {
                 String id = document.getId();
-                String nom = document.getString("Nom");
-                Long quantite = document.getLong("Quantite");
-                Long sortie = document.getLong("Sortie");
-                Materiaux m = new Materiaux(id, nom, quantite.intValue(), sortie.intValue());
+                String name = document.getString("Nom");
+                Long quantity = document.getLong("Quantite");
+                Long exit = document.getLong("Sortie");
+                Materiaux m = new Materiaux(id, name, quantity.intValue(), exit.intValue());
                 materiaux.add(m);
             }
 
-            //Cherche les infos de l'utilisateur connecté
+            // Find connected user informations
             ApiFuture<DocumentSnapshot> documentUser = db.collection("Agents").document(CurUser.getId()).get();
             DocumentSnapshot documentSnapshotUsers = documentUser.get();
 
@@ -155,7 +169,6 @@ public class MaterielController {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-
         return materiaux;
     }
 }

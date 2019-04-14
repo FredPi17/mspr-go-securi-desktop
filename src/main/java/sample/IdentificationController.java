@@ -67,26 +67,26 @@ public class IdentificationController {
         this.faceCascade = new CascadeClassifier();
         this.absoluteFaceSize = 0;
 
-        // set a fixed width for the frame
+        // Set a fixed width for the frame
         originalFrame.setFitWidth(600);
-        // preserve image ratio
+        // Preserve image ratio
         originalFrame.setPreserveRatio(true);
-        // start the video capture
+        // Start the video capture
         this.capture.open(0);
 
-        // is the video stream available?
+        // Is the video stream available?
         if (this.capture.isOpened()) {
             this.checkboxSelection("resources/lbpcascades/lbpcascade_frontalface.xml");
             this.cameraActive = true;
 
-            // grab a frame every 33 ms (30 frames/sec)
+            // Grab a frame every 33 ms (30 frames/sec)
             Runnable frameGrabber = new Runnable() {
 
                 @Override
                 public void run() {
-                    // effectively grab and process a single frame
+                    // Effectively grab and process a single frame
                     Mat frame = grabFrame();
-                    // convert and show the frame
+                    // Convert and show the frame
                     Image imageToShow = Utils.mat2Image(frame);
                     updateImageView(originalFrame, imageToShow);
                 }
@@ -96,7 +96,7 @@ public class IdentificationController {
             this.timer.scheduleAtFixedRate(frameGrabber, 0, 33, TimeUnit.MILLISECONDS);
 
         } else {
-            // log the error
+            // Log the error
             System.err.println("Failed to open the camera connection...");
         }
 
@@ -109,12 +109,12 @@ public class IdentificationController {
      */
     @FXML
     private void searchDataBase(ActionEvent event) {
-        //Get base de donnée
+        // Get database
         Firestore db = FirestoreClient.getFirestore();
 
-        Mat imageAComparer = grabFrame();
+        Mat picturesToCompare = grabFrame();
         Rect[] faces = null;
-        faces = this.detectFaces(imageAComparer);
+        faces = this.detectFaces(picturesToCompare);
         switch (faces.length) {
             case 0:
                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
@@ -125,7 +125,7 @@ public class IdentificationController {
                 alert1.showAndWait();
                 break;
             case 1:
-                Mat visageDetecte = new Mat(imageAComparer, faces[0]);
+                Mat detectedFace = new Mat(picturesToCompare, faces[0]);
                 String tempname = "test";
                 int i = 0;
                 File tempFile = new File(tempname + ".pgm");
@@ -134,16 +134,16 @@ public class IdentificationController {
                     tempFile = new File(tempname + ".pgm");
                 }
 
-                // convert the frame in gray scale
-                Imgproc.cvtColor(visageDetecte, visageDetecte, Imgproc.COLOR_BGR2GRAY);
+                // Convert the frame in gray scale
+                Imgproc.cvtColor(detectedFace, detectedFace, Imgproc.COLOR_BGR2GRAY);
                 Size sz = new Size(512,512);
-                Imgproc.resize( visageDetecte, visageDetecte, sz );
+                Imgproc.resize( detectedFace, detectedFace, sz );
 
-                Imgcodecs.imwrite(tempname + ".pgm", visageDetecte);
+                Imgcodecs.imwrite(tempname + ".pgm", detectedFace);
 
                 String userRecognized = null;
 
-                // add training data
+                // Add training data
                 try {
                     userRecognized = trainerface.recognize(convertToMatrix(tempname + ".pgm"));
                 } catch (Exception e) {
@@ -234,23 +234,23 @@ public class IdentificationController {
     private Mat grabFrame() {
         Mat frame = new Mat();
 
-        // check if the capture is open
+        // Check if the capture is open
         if (this.capture.isOpened()) {
             try {
-                // read the current frame
+                // Read the current frame
                 this.capture.read(frame);
 
-                // if the frame is not empty, process it
+                // If the frame is not empty, process it
                 if (!frame.empty()) {
                     Rect[] facesArray = this.detectFaces(frame);
-                    // face detection
+                    // Face detection
                     if (facesArray.length != 0) {
                         this.displayFaces(frame, facesArray);
                     }
                 }
 
             } catch (Exception e) {
-                // log the (full) error
+                // Log the (full) error
                 System.err.println("Exception during the image elaboration: " + e);
             }
         }
@@ -267,12 +267,12 @@ public class IdentificationController {
         MatOfRect faces = new MatOfRect();
         Mat grayFrame = new Mat();
 
-        // convert the frame in gray scale
+        // Convert the frame in gray scale
         Imgproc.cvtColor(frame, grayFrame, Imgproc.COLOR_BGR2GRAY);
-        // equalize the frame histogram to improve the result
+        // Equalize the frame histogram to improve the result
         Imgproc.equalizeHist(grayFrame, grayFrame);
 
-        // compute minimum face size (20% of the frame height, in our case)
+        // Compute minimum face size (20% of the frame height, in our case)
         if (this.absoluteFaceSize == 0) {
             int height = grayFrame.rows();
             if (Math.round(height * 0.2f) > 0) {
@@ -280,7 +280,7 @@ public class IdentificationController {
             }
         }
 
-        // detect faces
+        // Detect faces
         this.faceCascade.detectMultiScale(grayFrame, faces, 1.1, 2, 0 | Objdetect.CASCADE_SCALE_IMAGE,
                 new Size(this.absoluteFaceSize, this.absoluteFaceSize), new Size());
 
@@ -299,10 +299,10 @@ public class IdentificationController {
      * @param classifierPath the path on disk where a classifier trained set is located
      */
     private void checkboxSelection(String classifierPath) {
-        // load the classifier(s)
+        // Load the classifier(s)
         this.faceCascade.load(classifierPath);
 
-        // now the video capture can start
+        // Now the video capture can start
         this.captureButton.setDisable(false);
     }
 
@@ -312,18 +312,18 @@ public class IdentificationController {
     private void stopAcquisition() {
         if (this.timer != null && !this.timer.isShutdown()) {
             try {
-                // stop the timer
+                // Stop the timer
                 this.timer.shutdown();
                 this.timer.awaitTermination(33, TimeUnit.MILLISECONDS);
             } catch (InterruptedException e) {
-                // log any exception
+                // Log any exception
                 System.err.println("Exception in stopping the frame capture, trying to release the camera now... " + e);
                 return ;
             }
         }
 
         if (this.capture.isOpened()) {
-            // release the camera
+            // Release the camera
             this.capture.release();
         }
     }
@@ -360,6 +360,5 @@ public class IdentificationController {
             }
         }
         return result;
-
     }
 }
