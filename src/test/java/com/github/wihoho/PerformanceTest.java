@@ -1,12 +1,14 @@
 package com.github.wihoho;
 
 
-import com.github.wihoho.jama.Matrix;
-import com.github.wihoho.training.*;
-import com.google.common.io.ByteStreams;
-import com.google.common.io.Resources;
+import FaceReco.Trainer;
+import FaceReco.constant.FeatureType;
+import FaceReco.jama.*;
+import FaceReco.training.*;
+import com.google.api.client.util.ByteStreams;
 import org.junit.Test;
 
+import javax.annotation.Resources;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

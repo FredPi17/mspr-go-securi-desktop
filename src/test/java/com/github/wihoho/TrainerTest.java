@@ -3,12 +3,13 @@ package com.github.wihoho;
 import java.io.File;
 import java.io.IOException;
 
+import FaceReco.training.FileManager;
 import org.junit.Test;
 
-import com.github.wihoho.constant.FeatureType;
-import com.github.wihoho.jama.Matrix;
-import com.github.wihoho.training.CosineDissimilarity;
-import com.github.wihoho.training.FileManager;
+import FaceReco.Trainer;
+import FaceReco.constant.FeatureType;
+import FaceReco.jama.*;
+import FaceReco.training.CosineDissimilarity;
 
 import static org.junit.Assert.assertEquals;
 
