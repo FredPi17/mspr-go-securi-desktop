@@ -24,6 +24,7 @@ public class Main extends Application {
         FileInputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .setStorageBucket("mspr-java-8b250.appspot.com")
                 .build();
         FirebaseApp.initializeApp(options);
 

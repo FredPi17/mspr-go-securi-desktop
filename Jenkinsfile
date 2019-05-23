@@ -7,18 +7,19 @@ node {
         checkout scm
     }
 
-    stage('build') {
-        sh 'mvn build'
-
     stage('clean') {
-        sh "mvn clean"
-    }
-
-    stage('backend tests') {
-        sh "mvnw test"
+        sh 'mvn clean'
     }
 
     stage('code quality') {
         sh "mvn sonar:sonar -Dsonar.host.url=http://raspberrysqlserver.ddns.net:9000 -Dsonar.login=5806ef920a7d6515531604b3527be9414b5789dc"
+    }
+
+    stage('install') {
+        sh "mvn install -X"
+    }
+
+    stage('compile') {
+        sh "mvn compile"
     }
 }

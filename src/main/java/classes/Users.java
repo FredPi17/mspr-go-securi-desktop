@@ -1,14 +1,26 @@
 package classes;
 
+import javafx.scene.image.Image;
+
 public class Users {
     private String Id;
     private String Nom;
     private String Prenom;
+    private Image Image;
 
-    public Users(String id, String nom, String prenom) {
+    public Users(Image image, String id, String nom, String prenom) {
         Id = id;
         Nom = nom;
         Prenom = prenom;
+        Image = image;
+    }
+
+    public Image getImage() {
+        return Image;
+    }
+
+    public void setImage(Image image) {
+        this.Image = image;
     }
 
     public String getId() {

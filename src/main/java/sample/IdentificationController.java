@@ -10,11 +10,9 @@ import com.google.firebase.cloud.FirestoreClient;
 import javafx.scene.control.Alert;
 import org.opencv.imgcodecs.Imgcodecs;
 import utils.Utils;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
-import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.opencv.core.*;
@@ -25,7 +23,6 @@ import org.opencv.videoio.VideoCapture;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -142,10 +139,10 @@ public class IdentificationController {
                     e.printStackTrace();
                 }
 
-
-                Users user = new Users("Unknown", "Unknown", "Unknown");
+                Image visage = Utils.mat2Image(visageDetecte);
+                Users user = new Users(visage,"Unknown", "Unknown", "Unknown");
                 if (userRecognized != null) {
-                    user = new Users(userRecognized, userRecognized, userRecognized);
+                    user = new Users(visage, userRecognized, userRecognized, userRecognized);
                 }
 
                 if (userRecognized != null && userRecognized.startsWith("ATTENTION")

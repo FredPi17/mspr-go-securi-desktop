@@ -15,6 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,14 +46,13 @@ public class MaterielController {
 
     public void initData(Users user){
         CurUser = user;
+        Utils.onFXThread(ImgVPhotoUtilisateur.imageProperty(), CurUser.getImage());
         initializing();
     }
 
     @FXML
     private void initialize() {
         System.out.println("Demarrage de la page Materiel");
-        //Image image = new Image("eyes.jpg");
-        //ImgVPhotoUtilisateur.setImage(image);
         ArrayList<Materiaux> list = new ArrayList<Materiaux>();
         ObservableList<Materiaux> ObListMateriaux = FXCollections.observableArrayList(list);
         lstMateriel.setItems(ObListMateriaux);
@@ -80,6 +80,7 @@ public class MaterielController {
                     }
                 }
             });
+
 
             return cell;
         });
