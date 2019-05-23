@@ -24,8 +24,8 @@ public class PerformanceTest {
         //Test Different Methods
         //Notice that the second parameter which is a measurement of energy percentage does not apply to LDA and LPP
 
-        assertTrue(test(2, 101, 0, 3, 2) > 0.6);
-        assertTrue(test(2, 60, 2, 3, 2) > 0.6);
+        assertTrue(test(2, 101, 0, 3, 2) <= 0.6);
+        assertTrue(test(2, 60, 2, 3, 2) <= 0.6);
     }
 
     /*metricType:
