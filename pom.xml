@@ -46,25 +46,4 @@
             <version>3.4.2-0</version>
         </dependency>
     </dependencies>
-    <build>
-         <sourceDirectory>/</sourceDirectory>
-                  <plugins>
-                           <plugin>
-                                    <artifactId>kotlin-maven-plugin</artifactId>
-                                    <groupId>org.jetbrains.kotlin</groupId>
-                                    <version>${kotlin.version}</version>
-                                    <configuration/>
-                                    <executions>
-                                             <execution>
-                                                      <id>clean</id>
-                                                      <phase>process-sources</phase>
-                                                      <goals>
-                                                               <goal>clean</goal>
-                                                      </goals>
-                                    </execution>
-                           </plugin>
-                  </plugins>
-         </build>
-                                             
-    
 </project>
